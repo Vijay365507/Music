@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TuneWave - Checkout</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  .checkout-wrap { max-width: 480px; margin: 50px auto; padding: 20px; }
+  .checkout-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 30px; }
+  .checkout-row { display: flex; justify-content: space-between; margin-bottom: 12px; color: var(--muted); }
+  .checkout-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border); }
+  .checkout-box button { width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; font-size: 15px; margin-top: 20px; }
+</style>
+</head>
+<body data-theme="dark">
+
+  <nav class="navbar">
+    <div class="logo">🎵 TuneWave</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="premium.html">Premium</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle">☀ Light</button>
+  </nav>
+
+  <div class="checkout-wrap">
+    <div class="checkout-box">
+      <h2>Order Summary</h2>
+      <div class="checkout-row">
+        <span id="checkoutPlanName">Plan</span>
+        <span id="checkoutPlanPrice">₹0</span>
+      </div>
+      <div class="checkout-row">
+        <span>Billing cycle</span>
+        <span id="checkoutPeriod">Monthly</span>
+      </div>
+      <div class="checkout-row">
+        <span>Tax</span>
+        <span id="checkoutTax">₹0</span>
+      </div>
+      <div class="checkout-total">
+        <span>Total</span>
+        <span id="checkoutTotal">₹0</span>
+      </div>
+      <button onclick="window.location.href='payments.html'">Proceed to Payment</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function loadCheckoutSummary() {
+      const plan = JSON.parse(localStorage.getItem("selectedPlan"));
+      if (!plan) {
+        document.getElementById("checkoutPlanName").textContent = "No plan selected";
+        return;
+      }
+      const tax = Math.round(plan.price * 0.05);
+      const total = plan.price + tax;
+
+      document.getElementById("checkoutPlanName").textContent = plan.name + " Plan";
+      document.getElementById("checkoutPlanPrice").textContent = `₹${plan.price}`;
+      document.getElementById("checkoutPeriod").textContent = plan.period === "month" ? "Monthly" : plan.period;
+      document.getElementById("checkoutTax").textContent = `₹${tax}`;
+      document.getElementById("checkoutTotal").textContent = `₹${total}`;
+    }
+    document.addEventListener("DOMContentLoaded", loadCheckoutSummary);
+  </script>
+</body>
+</html>

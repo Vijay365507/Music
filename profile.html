@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TuneWave - Profile</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  .profile-wrap { max-width: 420px; margin: 50px auto; padding: 20px; }
+  .profile-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 30px; text-align: center; }
+  .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 15px; }
+  .profile-info { text-align: left; margin-top: 20px; }
+  .profile-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); color: var(--muted); }
+  .profile-row span:last-child { color: var(--text); font-weight: 500; }
+  .profile-box button { width: 100%; padding: 10px; border: none; border-radius: 8px; background: #e63950; color: #fff; cursor: pointer; font-size: 15px; margin-top: 20px; }
+</style>
+</head>
+<body data-theme="dark">
+
+  <nav class="navbar">
+    <div class="logo">🎵 TuneWave</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="liked.html">Liked</a></li>
+      <li><a href="premium.html">Premium</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle">☀ Light</button>
+  </nav>
+
+  <div class="profile-wrap">
+    <div class="profile-box">
+      <div class="profile-avatar" id="avatarLetter">U</div>
+      <h2 id="profileName">Guest</h2>
+      <div class="profile-info">
+        <div class="profile-row"><span>Email</span><span id="profileEmail">-</span></div>
+        <div class="profile-row"><span>Plan</span><span id="profilePlan">Free</span></div>
+        <div class="profile-row"><span>Liked Songs</span><span id="profileLikedCount">0</span></div>
+      </div>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="auth.js"></script>
+  <script>
+    function loadProfile() {
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+      document.getElementById("profileName").textContent = user.name;
+      document.getElementById("profileEmail").textContent = user.email;
+      document.getElementById("profilePlan").textContent = user.plan || "Free";
+      document.getElementById("avatarLetter").textContent = user.name.charAt(0).toUpperCase();
+
+      const liked = JSON.parse(localStorage.getItem("likedSongs")) || [];
+      document.getElementById("profileLikedCount").textContent = liked.length;
+    }
+    document.addEventListener("DOMContentLoaded", loadProfile);
+  </script>
+</body>
+</html>

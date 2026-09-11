@@ -1,0 +1,22 @@
+/* Default = Dark theme */
+:root,
+body[data-theme="dark"] {
+  --bg: #121212;
+  --nav-bg: #181818;
+  --card-bg: #1e1e1e;
+  --text: #ffffff;
+  --muted: #b3b3b3;
+  --border: #2a2a2a;
+  --accent: #1db954;
+}
+
+/* Bright / Light theme */
+body[data-theme="light"] {
+  --bg: #f7f7f7;
+  --nav-bg: #ffffff;
+  --card-bg: #ffffff;
+  --text: #121212;
+  --muted: #555555;
+  --border: #e0e0e0;
+  --accent: #1db954;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TuneWave - Payment</title>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  .payment-wrap { max-width: 420px; margin: 50px auto; padding: 20px; }
+  .payment-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 30px; }
+  .payment-summary { display: flex; justify-content: space-between; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border); }
+  .payment-box input { width: 100%; padding: 10px 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+  .payment-row { display: flex; gap: 10px; }
+  .payment-box button { width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; font-size: 15px; }
+</style>
+</head>
+<body data-theme="dark">
+
+  <nav class="navbar">
+    <div class="logo">🎵 TuneWave</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="checkout.html">Checkout</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle">☀ Light</button>
+  </nav>
+
+  <div class="payment-wrap">
+    <div class="payment-box">
+      <h2>Payment Details</h2>
+      <div class="payment-summary">
+        <span id="summaryPlanName">Plan</span>
+        <span id="summaryPlanPrice">₹0</span>
+      </div>
+      <p class="error-msg" id="paymentError"></p>
+      <form id="paymentForm">
+        <input type="text" id="cardName" placeholder="Name on Card">
+        <input type="text" id="cardNumber" placeholder="Card Number" maxlength="16">
+        <div class="payment-row">
+          <input type="text" id="cardExpiry" placeholder="MM/YY">
+          <input type="text" id="cardCVV" placeholder="CVV" maxlength="3">
+        </div>
+        <button type="submit">Pay Now</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="pay.js"></script>
+</body>
+</html>
